@@ -1,30 +1,107 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LivreController!{% endblock %}
+{% block title %}Bibliothèque des Enfants{% endblock %}
 
 {% block body %}
-    <h1>Mes livres</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Résumé</th>
-                <th>Couverture</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for livre in livres %}
-                <tr>
-                    <td>{{ livre.id }}</td>
-                    <td>{{ livre.titre }}</td>
-                    <td>{{ livre.resume }}</td>
-                    <td>{{ livre.couverture }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
+    <h1 class="page-title">Aventures Magiques</h1>
     
+    <div class="welcome-banner">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ff6b6b' d='M325.13 34.89c-27.9-3.4-56.43-5.56-85.13-5.56-28.7 0-57.23 2.16-85.13 5.56C130.35 37.47 110 40.63 90 44.47v16.86c20-4.09 40.35-7.38 64.87-10.06 27.32-3.32 55.22-5.43 82.24-5.43 0 28.96 0 339.21 0 367.51-27.02 0-54.92-2.11-82.24-5.43-24.52-2.68-44.88-5.97-64.87-10.06v16.86c19.99 3.84 40.35 7 54.87 9.58 27.9 3.4 56.43 5.56 85.13 5.56 28.7 0 57.23-2.16 85.13-5.56 14.53-2.58 34.89-5.74 54.87-9.58v-16.86c-20 4.09-40.35 7.38-64.87 10.06-27.32 3.32-55.22 5.43-82.24 5.43 0-28.96 0-339.21 0-367.51 27.02 0 54.92 2.11 82.24 5.43 24.52 2.68 44.88 5.97 64.87 10.06V44.47c-19.99-3.84-40.35-7-54.87-9.58z'/%3E%3C/svg%3E" alt="Livre" class="book-icon">
+        <p>Bienvenue dans ton monde magique de lecture ! Choisis un livre et pars à l'aventure !</p>
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2348dbfb' d='M325.13 34.89c-27.9-3.4-56.43-5.56-85.13-5.56-28.7 0-57.23 2.16-85.13 5.56C130.35 37.47 110 40.63 90 44.47v16.86c20-4.09 40.35-7.38 64.87-10.06 27.32-3.32 55.22-5.43 82.24-5.43 0 28.96 0 339.21 0 367.51-27.02 0-54.92-2.11-82.24-5.43-24.52-2.68-44.88-5.97-64.87-10.06v16.86c19.99 3.84 40.35 7 54.87 9.58 27.9 3.4 56.43 5.56 85.13 5.56 28.7 0 57.23-2.16 85.13-5.56 14.53-2.58 34.89-5.74 54.87-9.58v-16.86c-20 4.09-40.35 7.38-64.87 10.06-27.32 3.32-55.22 5.43-82.24 5.43 0-28.96 0-339.21 0-367.51 27.02 0 54.92 2.11 82.24 5.43 24.52 2.68 44.88 5.97 64.87 10.06V44.47c-19.99-3.84-40.35-7-54.87-9.58z'/%3E%3C/svg%3E" alt="Livre" class="book-icon">
+    </div>
+
+    <div class="card-grid">
+        {% for livre in livres %}
+            <div class="card">
+                <div class="card-image">
+                    {% if livre.couverture %}
+                        <a href="{{ path('app_livre_show', {'id': livre.id}) }}">
+                            <img src="{{ asset('uploads/couvertures/' ~ livre.couverture) }}" alt="Couverture {{ livre.titre }}">
+                        </a>
+                    {% else %}
+                        <div class="no-cover">
+                            <span>📕</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">{{ livre.titre }}</h2>
+                    <p class="card-author">
+                        {% if livre.auteur %}
+                            {{ livre.auteur.prenom }} {{ livre.auteur.nom }}
+                        {% else %}
+                            Auteur inconnu
+                        {% endif %}
+                    </p>
+                    <a href="{{ path('app_livre_show', {'id': livre.id}) }}" class="btn-discover">Découvrir</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <style>
+        .welcome-banner {
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 3px dashed var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        
+        .welcome-banner p {
+            font-size: 18px;
+            color: var(--dark-color);
+            margin: 0;
+            font-weight: bold;
+        }
+        
+        .book-icon {
+            width: 40px;
+            height: 40px;
+            animation: bounce 2s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        
+        .btn-discover {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 3px 0 #e6ac2e;
+        }
+        
+        .btn-discover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 #e6ac2e;
+        }
+        
+        @media (max-width: 768px) {
+            .welcome-banner {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .welcome-banner p {
+                font-size: 16px;
+            }
+        }
+    </style>
 {% endblock %}

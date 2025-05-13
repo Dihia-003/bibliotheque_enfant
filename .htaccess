@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Pour bloquer l'accès aux fichiers sensibles
+<FilesMatch "^\.env|composer\.(json|lock)|symfony\.lock">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Bloquer l'accès aux dossiers sensibles
+<DirectoryMatch "^/(var|vendor|src|config|bin)/">
+    Order deny,allow
+    Deny from all
+</DirectoryMatch>
+
+# Protection contre l'affichage des fichiers
+Options -Indexes 

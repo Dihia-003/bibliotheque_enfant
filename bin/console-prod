@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+use App\Kernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+
+if (!is_dir(dirname(__DIR__).'/vendor')) {
+    throw new LogicException('Dependencies are missing. Try running "composer install".');
+}
+
+if (!is_file(dirname(__DIR__).'/vendor/autoload_runtime.php')) {
+    throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
+}
+
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+
+// Définir explicitement l'environnement de production
+$_SERVER['APP_ENV'] = 'prod';
+$_SERVER['APP_DEBUG'] = '0';
+
+return function (array $context) {
+    // Forcer l'environnement de production
+    $context['APP_ENV'] = 'prod';
+    $context['APP_DEBUG'] = '0';
+    
+    $kernel = new Kernel('prod', false);
+
+    return new Application($kernel);
+}; 

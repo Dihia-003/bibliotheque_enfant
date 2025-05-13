@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -9,17 +8,46 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
-
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-###> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
-###< symfony/asset-mapper ###
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+# Fichiers générés par l'IDE
+/.idea/
+/.vscode/
+*.sublime-workspace
+
+# Fichiers Mac
+.DS_Store
+
+# Fichiers Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Fichiers de session PHP
+sess_*
+
+# Fichiers de logs
+*.log
+
+# Fichiers d'environnement personnels
+.env.*.local
+
+# Fichiers de sauvegarde
+*~
+*.bak
+*.swp
+
+# Fichiers de configuration locaux
+/config/packages/local/
+
+# Dossiers de cache et uploads (sauf .gitkeep)
+/public/uploads/*
+!/public/uploads/.gitkeep

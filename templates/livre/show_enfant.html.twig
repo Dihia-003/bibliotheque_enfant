@@ -1,0 +1,237 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ livre.titre }} - Bibliothèque des Enfants{% endblock %}
+
+{% block body %}
+    <div class="book-details">
+        <div class="book-info">
+            <a href="{{ path('app_livre') }}" class="btn-back">
+                <span class="arrow-left">←</span> Retour aux aventures
+            </a>
+        </div>
+        
+        <div class="page-decorations">
+            <div class="decoration left">✨</div>
+            <h1 class="page-title">{{ livre.titre }}</h1>
+            <div class="decoration right">✨</div>
+        </div>
+        
+        <div class="book-content">
+            <div class="book-cover">
+                {% if livre.couverture %}
+                    <img src="{{ asset('uploads/couvertures/' ~ livre.couverture) }}" alt="Couverture {{ livre.titre }}" class="cover-img">
+                {% else %}
+                    <div class="no-cover">
+                        <span>📕</span>
+                    </div>
+                {% endif %}
+                
+                <div class="book-bookmark">
+                    <div class="bookmark-top"></div>
+                    <div class="bookmark-bottom"></div>
+                </div>
+            </div>
+            
+            <div class="book-details-content">
+                <div class="magic-cloud">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="cloud-svg">
+                        <path fill="#FFEFD5" d="M41.3,-63.1C51.5,-53.1,56.7,-38.6,62.5,-24.6C68.3,-10.6,74.7,2.8,73.7,16C72.7,29.1,64.2,41.9,52.6,50.6C41,59.4,26.4,64.1,11.6,66.9C-3.2,69.7,-18.2,70.6,-32.9,66.5C-47.6,62.4,-62,53.3,-68.3,40.3C-74.6,27.3,-72.7,10.5,-71.2,-6.3C-69.7,-23.2,-68.6,-40.2,-59.3,-51.5C-50,-62.8,-32.5,-68.6,-16.5,-68.6C-0.5,-68.7,31.1,-73.1,41.3,-63.1Z" transform="translate(100 100)" />
+                    </svg>
+                    
+                    {% if livre.auteur %}
+                        <p class="book-author">Par {{ livre.auteur.prenom }} {{ livre.auteur.nom }}</p>
+                    {% else %}
+                        <p class="book-author">Par un auteur magique</p>
+                    {% endif %}
+                </div>
+                
+                <div class="book-summary">
+                    <h2 class="section-title">L'histoire magique</h2>
+                    {% if livre.resume %}
+                        <p>{{ livre.resume }}</p>
+                    {% else %}
+                        <p>Cette histoire est tellement magique qu'elle est invisible ! Utilise ton imagination pour la découvrir...</p>
+                    {% endif %}
+                </div>
+                
+                <div class="fun-facts">
+                    <h3 class="fun-title">Le savais-tu?</h3>
+                    <p>Les livres sont comme des portes magiques qui t'emmènent dans des mondes incroyables !</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .book-content {
+            display: flex;
+            margin-top: 2rem;
+            gap: 2rem;
+            position: relative;
+        }
+        
+        .book-cover {
+            flex: 0 0 300px;
+            position: relative;
+        }
+        
+        .cover-img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border: 8px solid white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--book-shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .book-cover:hover .cover-img {
+            transform: translateY(-15px) rotate(3deg);
+        }
+        
+        .no-cover {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: var(--border-radius);
+            border: 8px solid white;
+            box-shadow: var(--book-shadow);
+            color: var(--primary-color);
+            font-size: 72px;
+        }
+        
+        .book-details-content {
+            flex: 1;
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 3px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .book-meta {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .page-decorations {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .decoration {
+            font-size: 24px;
+            margin: 0 15px;
+            animation: twinkle 1.5s infinite alternate;
+        }
+        
+        .decoration.left {
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .book-bookmark {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            width: 40px;
+            height: 80px;
+            z-index: 10;
+        }
+        
+        .bookmark-top {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .bookmark-bottom {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid var(--primary-color);
+        }
+        
+        .magic-cloud {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .cloud-svg {
+            width: 200px;
+            height: 100px;
+        }
+        
+        .book-author {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            font-size: 18px;
+            color: var(--secondary-color);
+            font-weight: bold;
+            width: 80%;
+            text-align: center;
+        }
+        
+        .fun-facts {
+            margin-top: 30px;
+            background-color: rgba(254, 202, 87, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .fun-title {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .fun-facts:before {
+            content: "💡";
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            font-size: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .book-content {
+                flex-direction: column;
+            }
+            
+            .book-cover {
+                flex: 0 0 auto;
+                margin-bottom: 1.5rem;
+                max-width: 250px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .cloud-svg {
+                width: 150px;
+                height: 80px;
+            }
+            
+            .decoration {
+                font-size: 20px;
+                margin: 0 10px;
+            }
+        }
+    </style>
+{% endblock %} 

@@ -1,0 +1,124 @@
+{
+  "books": [
+    {
+      "id": 101,
+      "titre": "Charlie et la Chocolaterie",
+      "resume": "Charlie Bucket, un garçon pauvre, trouve un ticket d'or qui lui permet de visiter la mystérieuse chocolaterie de Willy Wonka. Un monde fantastique rempli de sucreries et de surprises l'attend !",
+      "couverture": "charlie.jpg",
+      "auteur": {
+        "prenom": "Roald",
+        "nom": "Dahl"
+      }
+    },
+    {
+      "id": 102,
+      "titre": "Harry Potter à l'école des sorciers",
+      "resume": "Harry Potter découvre qu'il est un sorcier et commence sa première année à Poudlard, l'école de sorcellerie. Il y fait des amis, apprend la magie et affronte des dangers.",
+      "couverture": "harry.jpg",
+      "auteur": {
+        "prenom": "J.K.",
+        "nom": "Rowling"
+      }
+    },
+    {
+      "id": 103,
+      "titre": "Le Petit Prince",
+      "resume": "Un aviateur échoué dans le désert rencontre un petit prince venu d'une autre planète. À travers leurs conversations, ils explorent des vérités importantes sur la vie et l'amitié.",
+      "couverture": "petit-prince.jpg",
+      "auteur": {
+        "prenom": "Antoine",
+        "nom": "de Saint-Exupéry"
+      }
+    },
+    {
+      "id": 104,
+      "titre": "Max et les Maximonstres",
+      "resume": "Max, envoyé dans sa chambre sans dîner, s'évade dans un monde imaginaire peuplé de monstres sauvages dont il devient le roi.",
+      "couverture": "max.jpg",
+      "auteur": {
+        "prenom": "Maurice",
+        "nom": "Sendak"
+      }
+    },
+    {
+      "id": 105,
+      "titre": "Le Chat Chapeauté",
+      "resume": "Un chat malicieux portant un chapeau haut-de-forme rend visite à deux enfants et transforme leur journée ennuyeuse en aventure chaotique.",
+      "couverture": "chat.jpg",
+      "auteur": {
+        "prenom": "Dr.",
+        "nom": "Seuss"
+      }
+    },
+    {
+      "id": 106,
+      "titre": "Fifi Brindacier",
+      "resume": "Fifi, une fille de 9 ans à la force surhumaine, vit seule avec son singe et son cheval. Son indépendance et son esprit rebelle la conduisent dans des aventures extraordinaires.",
+      "couverture": "fifi.jpg",
+      "auteur": {
+        "prenom": "Astrid",
+        "nom": "Lindgren"
+      }
+    },
+    {
+      "id": 107,
+      "titre": "Gruffalo",
+      "resume": "Une petite souris rusée invente un monstre effrayant appelé le Gruffalo pour échapper à ses prédateurs. Mais que se passe-t-il quand elle rencontre un vrai Gruffalo ?",
+      "couverture": "gruffalo.jpg",
+      "auteur": {
+        "prenom": "Julia",
+        "nom": "Donaldson"
+      }
+    },
+    {
+      "id": 108,
+      "titre": "Les Trois Brigands",
+      "resume": "Trois méchants brigands qui terrorisent la campagne voient leur vie transformée après leur rencontre avec une petite orpheline courageuse.",
+      "couverture": "brigands.jpg",
+      "auteur": {
+        "prenom": "Tomi",
+        "nom": "Ungerer"
+      }
+    },
+    {
+      "id": 109,
+      "titre": "L'Arbre Sans Fin",
+      "resume": "Hippolène vit dans un arbre sans fin avec sa famille. Après la mort de sa grand-mère, elle entreprend un voyage initiatique à travers les branches de l'arbre.",
+      "couverture": "arbre.jpg",
+      "auteur": {
+        "prenom": "Claude",
+        "nom": "Ponti"
+      }
+    },
+    {
+      "id": 110,
+      "titre": "Oh, Boy!",
+      "resume": "Trois enfants orphelins cherchent une famille. Leur demi-frère Barthélémy et leur tante demi-sœur Josiane sont les seuls parents qui leur restent, mais chacun a ses propres raisons de vouloir les accueillir.",
+      "couverture": "ohboy.jpg",
+      "auteur": {
+        "prenom": "Marie-Aude",
+        "nom": "Murail"
+      }
+    },
+    {
+      "id": 111,
+      "titre": "Matilda",
+      "resume": "Matilda, une petite fille surdouée, développe des pouvoirs télékinétiques qu'elle utilise pour se défendre contre ses parents négligents et la terrible directrice de son école.",
+      "couverture": "matilda.jpg",
+      "auteur": {
+        "prenom": "Roald",
+        "nom": "Dahl"
+      }
+    },
+    {
+      "id": 112,
+      "titre": "La bête sous la ville",
+      "resume": "Tom et ses amis partent à la recherche d'une créature mystérieuse qui vivrait dans les égouts de leur ville. Une aventure pleine de rebondissements et de mystères !",
+      "couverture": "bete.jpg",
+      "auteur": {
+        "prenom": "Claude",
+        "nom": "Ponti"
+      }
+    }
+  ]
+} 

@@ -2,8 +2,105 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Bibliothèque des Enfants{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>📚</text></svg>">
+        <style>
+            /* Style pour écraser les styles compilés */
+            html, body {
+                background-color: #f1f9ff !important;
+                font-family: 'Comic Sans MS', 'Bubblegum Sans', cursive !important;
+            }
+            
+            /* Menu burger toujours visible sur mobile */
+            @media (max-width: 800px) {
+                /* Le conteneur du site-nav doit être positionné correctement */
+                .site-nav {
+                    position: relative !important;
+                    display: flex !important;
+                    justify-content: space-between !important;
+                    align-items: center !important;
+                }
+                
+                /* Styles du menu burger */
+                .menu-burger {
+                    display: block !important;
+                    width: 35px !important;
+                    height: 30px !important;
+                    position: relative !important;
+                    cursor: pointer !important;
+                    margin-left: auto !important;
+                    z-index: 200 !important;
+                    background-color: rgba(255, 107, 107, 0.1) !important;
+                    border-radius: 8px !important;
+                    padding: 3px !important;
+                }
+                
+                .menu-burger span {
+                    display: block !important;
+                    width: 100% !important;
+                    height: 4px !important;
+                    background-color: #ff6b6b !important;
+                    margin: 6px 0 !important;
+                    border-radius: 4px !important;
+                    transition: all 0.3s ease !important;
+                }
+                
+                .menu-burger.open span:nth-child(1) {
+                    transform: rotate(45deg) translate(6px, 6px) !important;
+                }
+                
+                .menu-burger.open span:nth-child(2) {
+                    opacity: 0 !important;
+                }
+                
+                .menu-burger.open span:nth-child(3) {
+                    transform: rotate(-45deg) translate(6px, -6px) !important;
+                }
+                
+                /* Styles du menu mobile */
+                .nav-menu {
+                    display: flex !important;
+                    position: absolute !important;
+                    top: 100% !important;
+                    right: 0 !important;
+                    background-color: white !important;
+                    border-radius: 15px !important;
+                    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+                    padding: 15px !important;
+                    flex-direction: column !important;
+                    width: 200px !important;
+                    margin-top: 10px !important;
+                    opacity: 0 !important;
+                    transform: translateY(-20px) !important;
+                    pointer-events: none !important;
+                    z-index: 100 !important;
+                    transition: opacity 0.3s ease, transform 0.3s ease !important;
+                    border: 3px solid #feca57 !important;
+                }
+                
+                .nav-menu.show {
+                    opacity: 1 !important;
+                    transform: translateY(0) !important;
+                    pointer-events: auto !important;
+                }
+                
+                .nav-menu li {
+                    margin: 8px 0 !important;
+                    width: 100% !important;
+                }
+                
+                .nav-menu a {
+                    display: block !important;
+                    width: 100% !important;
+                    padding: 10px 15px !important;
+                    text-align: center !important;
+                    border-radius: 10px !important;
+                    box-shadow: 2px 2px 0 #ff6b6b !important;
+                }
+            }
+        </style>
+        <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
         {% block stylesheets %}
         {% endblock %}
 
@@ -12,6 +109,105 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header class="site-header">
+            <div class="container">
+                <nav class="site-nav">
+                    <a href="{{ path('app_livre') }}" class="site-title">Bibliothèque des Enfants</a>
+                    
+                    <div class="menu-burger" id="bookBurger" onclick="return false;">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    
+                    <ul class="nav-menu mobile-nav" id="mobileMenu">
+                        <li><a href="{{ path('app_livre') }}">Livres</a></li>
+                        <li><a href="{{ path('app_auteurs') }}">Auteurs</a></li>
+                        {% if is_granted('ROLE_USER') %}
+                            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        {% else %}
+                            <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('admin') }}">Administration</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main class="site-main">
+            <div class="container">
+                <div class="main-content">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="copyright">&copy; {{ "now"|date("Y") }} Bibliothèque des Enfants. Tous droits réservés. 📚</p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            // Menu burger - Code intégré directement dans le template
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('Initialisation du menu burger');
+                // Identifier les éléments
+                var menuBurger = document.getElementById('bookBurger');
+                var mobileMenu = document.getElementById('mobileMenu');
+                
+                if (menuBurger && mobileMenu) {
+                    console.log('Éléments de menu trouvés');
+                    
+                    // Gestionnaire d'événement pour le clic sur le menu burger
+                    menuBurger.onclick = function(e) {
+                        console.log('Menu burger cliqué');
+                        if (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                        this.classList.toggle('open');
+                        mobileMenu.classList.toggle('show');
+                        return false;
+                    };
+                    
+                    // Fermer le menu si clic en dehors
+                    document.addEventListener('click', function(e) {
+                        if (mobileMenu.classList.contains('show') && 
+                            !menuBurger.contains(e.target) && 
+                            !mobileMenu.contains(e.target)) {
+                            console.log('Fermeture du menu');
+                            menuBurger.classList.remove('open');
+                            mobileMenu.classList.remove('show');
+                        }
+                    });
+                } else {
+                    console.error('Éléments de menu non trouvés:', 
+                                 'menuBurger =', menuBurger, 
+                                 'mobileMenu =', mobileMenu);
+                }
+            });
+            
+            // Exécution immédiate si le DOM est déjà chargé
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                console.log('DOM déjà chargé, initialisation immédiate');
+                var event = document.createEvent('Event');
+                event.initEvent('DOMContentLoaded', true, true);
+                document.dispatchEvent(event);
+            }
+        </script>
     </body>
 </html>
