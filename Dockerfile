@@ -47,15 +47,23 @@ RUN mkdir -p var/cache var/log public/uploads/couvertures
 RUN chown -R www-data:www-data var public/uploads
 RUN chmod -R 755 var public/uploads
 
-# Compilation des assets
-RUN php bin/console asset-map:compile --env=prod
+# Création des dossiers nécessaires
+RUN mkdir -p var/cache var/log public/uploads/couvertures
 
-# Nettoyage du cache
-RUN php bin/console cache:clear --env=prod
-RUN php bin/console cache:warmup --env=prod
+# Définition des permissions
+RUN chown -R www-data:www-data var public/uploads
+RUN chmod -R 755 var public/uploads
 
 # Exposition du port
 EXPOSE 8000
 
+# Exposition du port
+EXPOSE 8000
+
+# Script de démarrage
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Commande de démarrage
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
