@@ -47,15 +47,10 @@ RUN mkdir -p var/cache var/log public/uploads/couvertures
 RUN chown -R www-data:www-data var public/uploads
 RUN chmod -R 755 var public/uploads
 
-# Création des dossiers nécessaires
-RUN mkdir -p var/cache var/log public/uploads/couvertures
-
-# Définition des permissions
-RUN chown -R www-data:www-data var public/uploads
-RUN chmod -R 755 var public/uploads
-
-# Exposition du port
-EXPOSE 8000
+# Créer un fichier .env de base pour le build
+RUN echo "APP_ENV=prod" > .env && \
+    echo "APP_DEBUG=0" >> .env && \
+    echo "APP_SECRET=build_secret" >> .env
 
 # Exposition du port
 EXPOSE 8000
