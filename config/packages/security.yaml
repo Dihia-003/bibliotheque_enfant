@@ -18,7 +18,7 @@ security:
             provider: app_user_provider
             form_login:
                 login_path: app_login
-                check_path: app_login
+                check_path: app_login_check
                 enable_csrf: true
                 username_parameter: email
                 password_parameter: password

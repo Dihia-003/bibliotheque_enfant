@@ -4,12 +4,12 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
+    #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
@@ -19,14 +19,21 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
-            'error' => $error,
+            'error' => $error
         ]);
     }
 
-    #[Route('/logout', name: 'app_logout')]
+    #[Route(path: '/login_check', name: 'app_login_check')]
+    public function check(): void
+    {
+        // This method can be blank - it will be intercepted by the key on your firewall
+        throw new \LogicException('This method can be blank - it will be intercepted by the key on your firewall.');
+    }
+
+    #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        // Cette méthode peut rester vide - elle sera interceptée par la clé de déconnexion du pare-feu
-        throw new \LogicException('Cette méthode peut être vide - elle sera interceptée par la clé de déconnexion du pare-feu');
+        // This method can be blank - it will be intercepted by the key on your firewall
+        throw new \LogicException('This method can be blank - it will be intercepted by the key on your firewall.');
     }
 } 

@@ -3,3 +3,16 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# Routes d'authentification
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_login_check:
+    path: /login_check
+    controller: App\Controller\SecurityController::check
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
