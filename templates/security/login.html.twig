@@ -20,7 +20,7 @@
             </div>
         {% endfor %}
         
-        <form method="post" class="auth-form">
+        <form method="post" action="{{ path('app_login_check') }}" class="auth-form">
             <div class="form-group">
                 <label for="inputEmail" class="form-label">Adresse email</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Votre adresse email" autocomplete="email" required autofocus>
