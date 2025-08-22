@@ -1,4 +1,4 @@
-# Dockerfile pour Symfony 7.2 sur Render
+# Dockerfile pour Symfony 7.2 sur Render - Version simplifiée
 FROM php:8.2-fpm
 
 # Variables d'environnement
@@ -6,29 +6,16 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
 
-# Installation des dépendances système
+# Installation des dépendances système minimales
 RUN apt-get update && apt-get install -y \
     git \
     curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
     unzip \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libwebp-dev \
-    libxpm-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
-    && docker-php-ext-install -j$(nproc) \
+    libzip-dev \
+    && docker-php-ext-install \
         pdo \
         pdo_pgsql \
         mbstring \
-        exif \
-        pcntl \
-        bcmath \
-        gd \
         zip \
     && rm -rf /var/lib/apt/lists/*
 
