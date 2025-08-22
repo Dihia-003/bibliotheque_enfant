@@ -15,14 +15,16 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libzip-dev \
     unzip \
+    postgresql-client \
     && docker-php-ext-install \
-    pdo_mysql \
-    mbstring \
-    exif \
-    pcntl \
-    bcmath \
-    gd \
-    zip \
+        pdo \
+        pdo_pgsql \
+        mbstring \
+        exif \
+        pcntl \
+        bcmath \
+        gd \
+        zip \
     && rm -rf /var/lib/apt/lists/*
 
 # Installation de Composer
@@ -34,23 +36,21 @@ WORKDIR /var/www
 # Copie des fichiers de dépendances
 COPY composer.json composer.lock ./
 
-# Installation des dépendances de production
+# Installation des dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-# Copie du code source
+# Copie de tout le code source
 COPY . .
 
+# Copie du fichier de production
+COPY .env.prod .env
+
 # Création des dossiers nécessaires
-RUN mkdir -p var/cache var/log public/uploads/couvertures
+RUN mkdir -p var/cache/prod var/log public/uploads/couvertures
 
 # Définition des permissions
 RUN chown -R www-data:www-data var public/uploads
 RUN chmod -R 755 var public/uploads
-
-# Créer un fichier .env de base pour le build
-RUN echo "APP_ENV=prod" > .env && \
-    echo "APP_DEBUG=0" >> .env && \
-    echo "APP_SECRET=build_secret" >> .env
 
 # Exposition du port
 EXPOSE 8000
@@ -59,6 +59,5 @@ EXPOSE 8000
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Commande de démarrage
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]

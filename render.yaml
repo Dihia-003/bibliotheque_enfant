@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: bibliotheque-enfant
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: APP_DEBUG
+        value: 0
+      - key: DATABASE_URL
+        value: postgresql://postgres.hyrbvsxrxfanivasssfl:Tbrmdr-213@aws-0-eu-central-1.pooler.supabase.com:6543/postgres
+      - key: APP_SECRET
+        generateValue: true
+    healthCheckPath: /admin
+    autoDeploy: true
