@@ -27,6 +27,3 @@ vendor/
 node_modules/
 npm-debug.log
 yarn-error.log
-
-# Garder .env.prod pour la production
-!.env.prod
