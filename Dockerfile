@@ -1,5 +1,5 @@
-# Dockerfile pour Symfony 7.2 sur Render - Version simplifiée
-FROM php:8.2-fpm
+# Dockerfile pour Symfony 7.2 sur Render - Version ultra-minimale
+FROM php:8.2-cli
 
 # Variables d'environnement
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -11,12 +11,6 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     unzip \
-    libzip-dev \
-    && docker-php-ext-install \
-        pdo \
-        pdo_pgsql \
-        mbstring \
-        zip \
     && rm -rf /var/lib/apt/lists/*
 
 # Installation de Composer
