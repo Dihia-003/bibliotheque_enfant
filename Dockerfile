@@ -28,8 +28,11 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 # Copie de tout le code source
 COPY . .
 
-# Copie du fichier de production
-COPY .env.prod .env
+# Création du fichier .env directement
+RUN echo 'APP_ENV=prod' > .env && \
+    echo 'APP_DEBUG=0' >> .env && \
+    echo 'APP_SECRET=your_production_secret_here' >> .env && \
+    echo 'DATABASE_URL="postgresql://postgres.hyrbvsxrxfanivasssfl:Tbrmdr-213@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"' >> .env
 
 # Création des dossiers nécessaires
 RUN mkdir -p var/cache/prod var/log public/uploads/couvertures
