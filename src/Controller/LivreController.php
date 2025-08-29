@@ -15,17 +15,27 @@ final class LivreController extends AbstractController
     #[Route('/livre', name: 'app_livre')]
     public function index(LivreRepository $livreRepository, KernelInterface $kernel, SerializerInterface $serializer): Response
     {
-        // Chargement des livres depuis la base de données, si disponibles
-        $livresDb = $livreRepository->findAll();
+        try {
+            // Chargement des livres depuis la base de données, si disponibles
+            $livresDb = $livreRepository->findAll();
+        } catch (\Exception $e) {
+            // En cas d'erreur de base de données, on continue avec un tableau vide
+            $livresDb = [];
+        }
         
         // Chargement des livres pour enfants depuis le JSON
         $jsonPath = $kernel->getProjectDir() . '/public/data/children-books.json';
         $livresEnfants = [];
         
         if (file_exists($jsonPath)) {
-            $jsonContent = file_get_contents($jsonPath);
-            $data = json_decode($jsonContent, true);
-            $livresEnfants = $data['books'] ?? [];
+            try {
+                $jsonContent = file_get_contents($jsonPath);
+                $data = json_decode($jsonContent, true);
+                $livresEnfants = $data['books'] ?? [];
+            } catch (\Exception $e) {
+                // En cas d'erreur de lecture du JSON, on continue avec un tableau vide
+                $livresEnfants = [];
+            }
         }
         
         return $this->render('livre/index.html.twig', [

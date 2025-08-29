@@ -34,7 +34,7 @@ COPY . .
 
 # Création du fichier .env directement
 RUN echo 'APP_ENV=prod' > .env && \
-    echo 'APP_DEBUG=0' >> .env && \
+    echo 'APP_DEBUG=1' >> .env && \
     echo 'APP_SECRET=your_production_secret_here' >> .env && \
     echo 'DATABASE_URL="postgresql://postgres.hyrbvsxrxfanivasssfl:Tbrmdr-213@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"' >> .env
 

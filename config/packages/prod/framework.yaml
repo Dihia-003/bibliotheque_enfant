@@ -1,0 +1,19 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    session: true
+    
+    # En production, on peut activer temporairement le debug pour diagnostiquer
+    profiler:
+        collect: false
+        only_exceptions: true
+    
+    # Gestion des erreurs
+    error_controller: App\Controller\ErrorController::index
+    
+    # Cache
+    cache:
+        app: cache.adapter.filesystem
+        system: cache.adapter.system
+        directory: '%kernel.cache_dir%/pools'
+        default_doctrine_result_cache: cache.app
+        default_doctrine_system_cache: cache.system

@@ -9,7 +9,7 @@ services:
       - key: APP_ENV
         value: prod
       - key: APP_DEBUG
-        value: 0
+        value: 1
       - key: DATABASE_URL
         value: postgresql://postgres.hyrbvsxrxfanivasssfl:Tbrmdr-213@aws-0-eu-central-1.pooler.supabase.com:6543/postgres
       - key: APP_SECRET
