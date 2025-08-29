@@ -17,6 +17,10 @@ RUN apt-get update && apt-get install -y \
 # Installation de l'extension PostgreSQL pour PHP
 RUN docker-php-ext-install pdo_pgsql
 
+# Vérification de l'installation
+RUN php -m | grep pdo_pgsql || echo "WARNING: pdo_pgsql not found"
+RUN php -m | grep pdo || echo "WARNING: no pdo drivers found"
+
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

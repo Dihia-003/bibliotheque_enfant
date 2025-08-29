@@ -31,6 +31,11 @@ echo "🧹 Nettoyage du cache..."
 php bin/console cache:clear --env=prod || echo "Warning: Cache clear failed, continuing..."
 php bin/console cache:warmup --env=prod || echo "Warning: Cache warmup failed, continuing..."
 
+# Vérification des extensions PHP
+echo "🔍 Vérification des extensions PHP..."
+php -m | grep pdo_pgsql || echo "WARNING: pdo_pgsql extension not found"
+php -m | grep pdo || echo "WARNING: no pdo drivers found"
+
 # Vérification de la base de données
 echo "🗄️ Vérification de la base de données..."
 php bin/console doctrine:query:sql "SELECT 1" || echo "Warning: Database connection failed, continuing..."
