@@ -11,20 +11,19 @@ echo "🔐 Vérification des permissions..."
 chown -R www-data:www-data var public/uploads || echo "Warning: Permission change failed, continuing..."
 chmod -R 755 var public/uploads || echo "Warning: Permission change failed, continuing..."
 
-# Compilation des assets si pas encore fait
-if [ ! -f "var/cache/prod/.assets_compiled" ]; then
-    echo "🎨 Compilation des assets..."
-    php bin/console asset-map:compile --env=prod || echo "Warning: Assets compilation failed, continuing..."
-    
-    # Vérifier que les assets ont été compilés
-    if [ -d "public/assets" ]; then
-        echo "✅ Assets compilés avec succès"
-        touch var/cache/prod/.assets_compiled
-    else
-        echo "⚠️ Assets non compilés, création d'un fallback"
-        mkdir -p public/assets/styles
-        echo "/* Fallback CSS */" > public/assets/styles/app.css
-    fi
+# Forcer la recompilation des assets à chaque démarrage
+echo "🎨 Compilation des assets..."
+rm -rf public/assets var/cache/prod/.assets_compiled
+php bin/console asset-map:compile --env=prod || echo "Warning: Assets compilation failed, continuing..."
+
+# Vérifier que les assets ont été compilés
+if [ -d "public/assets" ]; then
+    echo "✅ Assets compilés avec succès"
+    touch var/cache/prod/.assets_compiled
+else
+    echo "⚠️ Assets non compilés, création d'un fallback"
+    mkdir -p public/assets/styles
+    echo "/* Fallback CSS */" > public/assets/styles/app.css
 fi
 
 # Nettoyage et réchauffement du cache

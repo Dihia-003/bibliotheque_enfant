@@ -5,3 +5,5 @@ framework:
         missing_import_mode: warn
         # En production, on peut désactiver la compilation stricte
         strict_mode: false
+        # Forcer la recompilation
+        cache: false

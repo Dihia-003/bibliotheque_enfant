@@ -1,29 +1,13 @@
-# Fichiers et dossiers à ignorer lors du build Docker
-.git
-.gitignore
-README.md
-README-deploy.md
-.env
+# Ignorer les assets compilés localement
+public/assets/
+var/cache/
+var/log/
+
+# Ignorer les fichiers de développement
 .env.local
 .env.test
 .env.dev
-composer.json-prod
-deploy.sh
-deploy-prod.php
-prepare-deploy.bat
-.ovhconfig
-Procfile
-.htaccess
-compose.yaml
-compose.override.yaml
-create_user_table.sql
-phpunit.xml.dist
-tests/
-var/cache/*
-var/log/*
-public/uploads/*
-!public/uploads/.gitkeep
-vendor/
+
+# Ignorer les dossiers de build
 node_modules/
-npm-debug.log
-yarn-error.log
+vendor/
