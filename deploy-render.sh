@@ -3,8 +3,8 @@
 echo "🚀 Déploiement automatisé sur Render..."
 
 # Vérification que nous sommes sur la branche principale
-if [[ $(git branch --show-current) != "main" ]]; then
-    echo "❌ Erreur: Vous devez être sur la branche main"
+if [[ $(git branch --show-current) != "main" && $(git branch --show-current) != "master" ]]; then
+    echo "❌ Erreur: Vous devez être sur la branche main ou master"
     exit 1
 fi
 
@@ -24,3 +24,4 @@ echo "✅ Déploiement initié !"
 echo "🌐 Vérifiez le statut sur: https://dashboard.render.com"
 echo "⏳ Le déploiement prendra environ 5-10 minutes"
 echo "🔗 Votre app sera disponible sur: https://bibliotheque-enfant.onrender.com"
+echo "📝 Note: Assurez-vous que votre branche est configurée comme branche par défaut sur GitHub"

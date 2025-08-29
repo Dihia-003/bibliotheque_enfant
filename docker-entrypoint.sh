@@ -27,6 +27,10 @@ php bin/console cache:warmup --env=prod || echo "Warning: Cache warmup failed, c
 echo "🗄️ Vérification de la base de données..."
 php bin/console doctrine:query:sql "SELECT 1" || echo "Warning: Database connection failed, continuing..."
 
+# Exécution des migrations si nécessaire
+echo "🔄 Vérification des migrations..."
+php bin/console doctrine:migrations:migrate --no-interaction --env=prod || echo "Warning: Migrations failed, continuing..."
+
 echo "✅ Application Symfony initialisée avec succès !"
 
 # Exécuter la commande passée en paramètre
