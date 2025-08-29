@@ -40,7 +40,7 @@ COPY . .
 RUN echo 'APP_ENV=prod' > .env && \
     echo 'APP_DEBUG=1' >> .env && \
     echo 'APP_SECRET=your_production_secret_here' >> .env && \
-    echo 'DATABASE_URL="postgresql://postgres.hyrbvsxrxfanivasssfl:Tbrmdr-213@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"' >> .env
+               echo 'DATABASE_URL="postgresql://postgres.hyrbvsxrxfanivasssfl:0hmMirvhu0ZnSps0@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"' >> .env
 
 # Création des dossiers nécessaires
 RUN mkdir -p var/cache/prod var/log public/uploads/couvertures
