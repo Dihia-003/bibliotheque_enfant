@@ -18,7 +18,7 @@ git commit -m "feat: Configuration Docker optimisée pour Render - Support Postg
 
 # Push vers GitHub
 echo "⬆️ Push vers GitHub..."
-git push origin main
+git push origin $(git branch --show-current)
 
 echo "✅ Déploiement initié !"
 echo "🌐 Vérifiez le statut sur: https://dashboard.render.com"
