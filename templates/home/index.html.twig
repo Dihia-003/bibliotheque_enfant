@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliothèque d'Enfants - Accueil{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="jumbotron text-center bg-primary text-white rounded p-5 mb-5">
+        <h1 class="display-4">📚 Bienvenue dans la Bibliothèque d'Enfants !</h1>
+        <p class="lead">Découvrez des histoires merveilleuses et des aventures extraordinaires</p>
+        <hr class="my-4">
+        <p>Explorez notre collection de livres pour enfants et laissez-vous emporter par la magie de la lecture</p>
+        <a class="btn btn-light btn-lg" href="{{ path('app_livre') }}" role="button">Voir tous les livres</a>
+    </div>
+
+    {% if livresEnfants is not empty %}
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center mb-4">🌟 Nos Livres Coup de Cœur</h2>
+        </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for livre in livresEnfants %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ livre.titre }}</h5>
+                    <p class="card-text text-muted">
+                        <small>Par {{ livre.auteur.prenom }} {{ livre.auteur.nom }}</small>
+                    </p>
+                    <p class="card-text">{{ livre.resume|length > 100 ? livre.resume|slice(0, 100) ~ '...' : livre.resume }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="{{ path('app_livre_enfant_show', {id: livre.id}) }}" class="btn btn-outline-primary btn-sm">
+                        Lire la suite
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="text-center mt-5">
+        <a href="{{ path('app_livre') }}" class="btn btn-primary btn-lg">
+            Voir tous les livres
+        </a>
+    </div>
+    {% else %}
+    <div class="text-center">
+        <h3>📖 Aucun livre disponible pour le moment</h3>
+        <p>Nous travaillons pour ajouter de nouveaux livres à notre bibliothèque.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
