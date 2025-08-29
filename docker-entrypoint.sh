@@ -14,16 +14,19 @@ chmod -R 755 var public/uploads || echo "Warning: Permission change failed, cont
 # Forcer la recompilation des assets à chaque démarrage
 echo "🎨 Compilation des assets..."
 rm -rf public/assets var/cache/prod/.assets_compiled
+
+# Compiler les assets
 php bin/console asset-map:compile --env=prod || echo "Warning: Assets compilation failed, continuing..."
 
 # Vérifier que les assets ont été compilés
-if [ -d "public/assets" ]; then
+if [ -d "public/assets" ] && [ "$(ls -A public/assets)" ]; then
     echo "✅ Assets compilés avec succès"
     touch var/cache/prod/.assets_compiled
 else
     echo "⚠️ Assets non compilés, création d'un fallback"
     mkdir -p public/assets/styles
     echo "/* Fallback CSS */" > public/assets/styles/app.css
+    echo "/* Fallback JS */" > public/assets/app.js
 fi
 
 # Nettoyage et réchauffement du cache

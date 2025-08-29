@@ -11,7 +11,7 @@ use Throwable;
 final class ErrorController extends AbstractController
 {
     #[Route('/error', name: 'app_error')]
-    public function index(LoggerInterface $logger): Response
+    public function index(?LoggerInterface $logger = null): Response
     {
         // Capturer la dernière erreur
         $error = error_get_last();

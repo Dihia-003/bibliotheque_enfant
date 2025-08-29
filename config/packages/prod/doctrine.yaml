@@ -1,8 +1,6 @@
 doctrine:
     dbal:
-        # Désactiver temporairement pour diagnostiquer
-        url: 'null://localhost'
-        # url: '%env(resolve:DATABASE_URL)%'
+        url: '%env(resolve:DATABASE_URL)%'
         server_version: '15'
         profiling_collect_backtrace: false
         use_savepoints: true
