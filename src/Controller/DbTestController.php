@@ -5,8 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use PDO;
-use PDOException;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception\ConnectionException;
 
 final class DbTestController extends AbstractController
 {
@@ -41,12 +41,12 @@ final class DbTestController extends AbstractController
     private function testConnection(string $url): array
     {
         try {
-            $pdo = new PDO($url);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Utiliser Doctrine DBAL au lieu de PDO directement
+            $connection = \Doctrine\DBAL\DriverManager::getConnection(['url' => $url]);
+            $connection->connect();
             
             // Test de requête simple
-            $stmt = $pdo->query('SELECT 1 as test, current_user as user, current_database() as db');
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $connection->fetchAssociative('SELECT 1 as test, current_user as user, current_database() as db');
             
             return [
                 'status' => 'SUCCESS',
@@ -55,7 +55,14 @@ final class DbTestController extends AbstractController
                 'url' => $url
             ];
             
-        } catch (PDOException $e) {
+        } catch (ConnectionException $e) {
+            return [
+                'status' => 'ERROR',
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'url' => $url
+            ];
+        } catch (\Exception $e) {
             return [
                 'status' => 'ERROR',
                 'message' => $e->getMessage(),
