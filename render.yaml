@@ -4,7 +4,6 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    dockerCommand: docker-entrypoint.sh
     envVars:
       - key: APP_ENV
         value: prod

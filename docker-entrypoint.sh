@@ -79,7 +79,7 @@ echo "🔐 Configuration des permissions finales..."
 chown -R www-data:www-data var public/assets
 chmod -R 755 var public/assets
 
-echo "🎉 Application prête ! Démarrage du serveur web..."
+echo "🎉 Application prête ! Démarrage d'Apache..."
 
-# Démarrer le serveur web
+# Démarrer Apache en premier plan
 exec apache2-foreground
