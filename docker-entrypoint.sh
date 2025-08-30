@@ -34,6 +34,10 @@ if [ ! -d "public/assets" ] || [ -z "$(ls -A public/assets 2>/dev/null)" ]; then
     echo "console.log('Fallback Stimulus Bundle loaded');" >> public/assets/@symfony/stimulus-bundle/controllers-IWeobkd.js
     echo "/* Fallback UX Turbo */" > public/assets/@symfony/ux-turbo/turbo_controller-8wQNi2p.js
     echo "console.log('Fallback UX Turbo loaded');" >> public/assets/@symfony/ux-turbo/turbo_controller-8wQNi2p.js
+    echo "/* Fallback Loader */" > public/assets/@symfony/stimulus-bundle/loader-V1GtHuK.js
+    echo "console.log('Fallback Loader loaded');" >> public/assets/@symfony/stimulus-bundle/loader-V1GtHuK.js
+    echo "/* Fallback Hello Controller */" > public/assets/controllers/hello_controller-VYgvytJ.js
+    echo "console.log('Fallback Hello Controller loaded');" >> public/assets/controllers/hello_controller-VYgvytJ.js
 
     echo "✅ Assets de fallback créés avec succès"
 fi

@@ -58,7 +58,11 @@ RUN echo "/* Fallback CSS - Bibliothèque des Enfants */" > public/assets/styles
     echo "/* Fallback Stimulus Bundle */" > public/assets/@symfony/stimulus-bundle/controllers-IWeobkd.js && \
     echo "console.log('Fallback Stimulus Bundle loaded');" >> public/assets/@symfony/stimulus-bundle/controllers-IWeobkd.js && \
     echo "/* Fallback UX Turbo */" > public/assets/@symfony/ux-turbo/turbo_controller-8wQNi2p.js && \
-    echo "console.log('Fallback UX Turbo loaded');" >> public/assets/@symfony/ux-turbo/turbo_controller-8wQNi2p.js
+    echo "console.log('Fallback UX Turbo loaded');" >> public/assets/@symfony/ux-turbo/turbo_controller-8wQNi2p.js && \
+    echo "/* Fallback Loader */" > public/assets/@symfony/stimulus-bundle/loader-V1GtHuK.js && \
+    echo "console.log('Fallback Loader loaded');" >> public/assets/@symfony/stimulus-bundle/loader-V1GtHuK.js && \
+    echo "/* Fallback Hello Controller */" > public/assets/controllers/hello_controller-VYgvytJ.js && \
+    echo "console.log('Fallback Hello Controller loaded');" >> public/assets/controllers/hello_controller-VYgvytJ.js
 
 # Définition des permissions
 RUN chown -R www-data:www-data var public/uploads
