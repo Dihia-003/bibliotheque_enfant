@@ -15,6 +15,3 @@ services:
         value: null://null
     healthCheckPath: /
     autoDeploy: true
-    buildCommand: |
-      chmod +x init.sh
-      ./init.sh
