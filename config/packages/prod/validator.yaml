@@ -4,7 +4,3 @@ framework:
         enable_annotations: false
         mapping:
             paths: []
-        
-        # Configuration des contraintes
-        constraints:
-            - App\Validator\Constraints\CustomConstraint

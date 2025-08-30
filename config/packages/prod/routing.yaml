@@ -1,7 +1,6 @@
 framework:
     router:
         # Configuration de production pour le routing
-        default_uri: 'https://%env(APP_DOMAIN)%'
         strict_requirements: false
         
         # Configuration du cache des routes
