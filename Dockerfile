@@ -38,8 +38,8 @@ WORKDIR /var/www
 # Copie des fichiers de dépendances
 COPY composer.json composer.lock ./
 
-# Installation des dépendances
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Installation des dépendances (sans scripts)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Copie du reste du code source
 COPY . .
