@@ -4,7 +4,6 @@ framework:
         app: cache.adapter.filesystem
         system: cache.adapter.system
         directory: '%kernel.project_dir%/var/cache'
-        default_doctrine_provider: 'doctrine.system_cache_pool'
         
         # Configuration des pools de cache
         pools:
