@@ -9,7 +9,5 @@ framework:
         pools:
             doctrine.result_cache_pool:
                 adapter: cache.adapter.filesystem
-                tags: cache.tags
             doctrine.system_cache_pool:
                 adapter: cache.adapter.filesystem
-                tags: cache.tags
