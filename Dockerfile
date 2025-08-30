@@ -51,19 +51,11 @@ RUN mkdir -p var/cache var/log public/uploads
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# Création de la base SQLite et exécution des migrations
-RUN touch var/database.sqlite && \
-    chown -R www-data:www-data var public/uploads && \
-    chmod -R 755 var public/uploads && \
-    chmod 664 var/database.sqlite
-
 # Définition des permissions
 RUN chown -R www-data:www-data /var/www
 
 # Exposition du port 80
 EXPOSE 80
 
-# Point d'entrée avec initialisation
-CMD php bin/console cache:clear --env=prod --no-debug && \
-    php bin/console doctrine:migrations:migrate --env=prod --no-interaction && \
-    apache2-foreground
+# Point d'entrée ultra-simple
+CMD ["apache2-foreground"]
