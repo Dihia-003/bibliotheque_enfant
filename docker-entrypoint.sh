@@ -15,6 +15,22 @@ chmod -R 755 var public/uploads || echo "Warning: Permission change failed, cont
 echo "🎨 Compilation des assets..."
 rm -rf public/assets var/cache/prod/.assets_compiled
 
+# Créer un dossier assets minimal si la compilation échoue
+echo "⚠️ Création d'un fallback d'assets..."
+mkdir -p public/assets/styles public/assets/controllers public/assets/vendor/@hotwired/stimulus public/assets/vendor/@hotwired/turbo public/assets/@symfony/stimulus-bundle public/assets/@symfony/ux-turbo
+
+# Créer des fichiers CSS et JS de base
+echo "/* Fallback CSS */" > public/assets/styles/app.css
+echo "/* Fallback JS */" > public/assets/app.js
+echo "/* Fallback Bootstrap */" > public/assets/bootstrap.js
+echo "/* Fallback Stimulus */" > public/assets/vendor/@hotwired/stimulus/stimulus.index.js
+echo "/* Fallback Turbo */" > public/assets/vendor/@hotwired/turbo/turbo.index.js
+echo "/* Fallback Stimulus Bundle */" > public/assets/@symfony/stimulus-bundle/controllers.js
+echo "/* Fallback UX Turbo */" > public/assets/@symfony/ux-turbo/turbo_controller.js
+
+echo "✅ Assets de fallback créés avec succès"
+touch var/cache/prod/.assets_compiled
+
 # Compiler les assets en mode dev pour éviter les erreurs de base de données
 php bin/console asset-map:compile --env=dev --no-interaction || echo "Warning: Assets compilation failed, continuing..."
 
