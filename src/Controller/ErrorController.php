@@ -16,7 +16,7 @@ final class ErrorController extends AbstractController
         // Capturer la dernière erreur
         $error = error_get_last();
         
-        if ($error) {
+        if ($error && $logger) {
             $logger->error('Erreur PHP: ' . json_encode($error));
         }
         

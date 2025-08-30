@@ -44,6 +44,9 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-script
 # Copie du reste du code source
 COPY . .
 
+# Génération de l'autoload et exécution des scripts nécessaires
+RUN composer dump-autoload --optimize --no-dev --classmap-authoritative
+
 # Création des dossiers nécessaires
 RUN mkdir -p var/cache var/log public/uploads
 
