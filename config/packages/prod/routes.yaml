@@ -2,33 +2,30 @@
 # Ce fichier définit les routes de l'application
 
 # Routes d'administration (EasyAdmin)
-admin:
+easy_admin:
     resource: ../src/Controller/Admin/DashboardController.php
     type: attribute
     prefix: /admin
 
 # Routes de sécurité
-app_login:
-    path: /login
-    controller: App\Controller\SecurityController::login
+security:
+    resource: ../src/Controller/SecurityController.php
+    type: attribute
+    prefix: /
 
-app_logout:
-    path: /logout
-    controller: App\Controller\SecurityController::logout
-
-app_register:
-    path: /register
-    controller: App\Controller\RegistrationController::register
+# Routes d'enregistrement
+registration:
+    resource: ../src/Controller/RegistrationController.php
+    type: attribute
+    prefix: /
 
 # Routes principales
-app_home:
-    path: /
-    controller: App\Controller\HomeController::index
+home:
+    resource: ../src/Controller/HomeController.php
+    type: attribute
+    prefix: /
 
-app_livre_index:
-    path: /livre
-    controller: App\Controller\LivreController::index
-
-app_livre_show:
-    path: /livre/{id}
-    controller: App\Controller\LivreController::show
+livre:
+    resource: ../src/Controller/LivreController.php
+    type: attribute
+    prefix: /
