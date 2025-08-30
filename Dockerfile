@@ -39,19 +39,15 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Définition du répertoire de travail
 WORKDIR /var/www
 
-# Copie des fichiers de configuration
-COPY composer.json composer.lock ./
-COPY config/ ./config/
-COPY src/ ./src/
-COPY templates/ ./templates/
-COPY migrations/ ./migrations/
-COPY public/ ./public/
-COPY bin/ ./bin/
-COPY importmap.php ./
-COPY symfony.lock ./
+# Copie des fichiers de dépendances en premier
+COPY composer.json ./
+COPY composer.lock ./
 
 # Installation des dépendances
 RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Copie du reste du code source
+COPY . .
 
 # Création des dossiers nécessaires
 RUN mkdir -p var/cache var/log public/uploads

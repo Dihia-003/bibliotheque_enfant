@@ -2,7 +2,6 @@
 .git
 .gitignore
 README.md
-composer.lock
 vendor/
 var/cache/
 var/log/
