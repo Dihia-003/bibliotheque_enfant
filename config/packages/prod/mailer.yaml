@@ -2,7 +2,3 @@ framework:
     mailer:
         # Configuration de production pour le mailer
         dsn: '%env(MAILER_DSN)%'
-        
-        # Configuration des transports
-        transports:
-            main: '%env(MAILER_DSN)%'
