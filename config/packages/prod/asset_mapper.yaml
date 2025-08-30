@@ -3,9 +3,8 @@ framework:
         # Configuration de production pour Asset Mapper
         paths:
             - assets/
-        exclude:
+        excluded_patterns:
             - '*.map'
             - '*.d.ts'
         importmap_polyfill: auto
-        # Désactiver la compilation automatique en production
-        compile: false
+        missing_import_mode: warn
