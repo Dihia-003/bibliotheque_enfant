@@ -148,4 +148,4 @@ Si vous rencontrez des erreurs 500, vérifiez les logs:
 - Nginx: `error.log`
 - Application: `var/log/prod.log`
 
-Pour plus d'informations, consultez la documentation officielle de Symfony sur le déploiement: https://symfony.com/doc/current/deployment.html 
+Pour plus d'informations, consultez la documentation officielle de Symfony sur le déploiement: https://symfony.com/doc/current/deployment.html # Updated for deployment
