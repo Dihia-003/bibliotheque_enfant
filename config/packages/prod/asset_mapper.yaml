@@ -6,5 +6,5 @@ framework:
         excluded_patterns:
             - '*.map'
             - '*.d.ts'
-        importmap_polyfill: auto
+        importmap_polyfill: false
         missing_import_mode: warn
