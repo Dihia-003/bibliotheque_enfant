@@ -1,6 +1,6 @@
 framework:
     validation:
         # Configuration de production pour la validation
-        enable_annotations: false
+        enable_attributes: false
         mapping:
             paths: []
