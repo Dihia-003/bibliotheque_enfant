@@ -1,17 +1,13 @@
 # Configuration de production pour les routes
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+# Ce fichier définit les routes de l'application
 
-# Configuration des routes d'administration
+# Routes d'administration (EasyAdmin)
 admin:
-    resource: ../src/Controller/Admin/
+    resource: ../src/Controller/Admin/DashboardController.php
     type: attribute
     prefix: /admin
 
-# Configuration des routes de sécurité
+# Routes de sécurité
 app_login:
     path: /login
     controller: App\Controller\SecurityController::login
@@ -24,7 +20,7 @@ app_register:
     path: /register
     controller: App\Controller\RegistrationController::register
 
-# Configuration des routes principales
+# Routes principales
 app_home:
     path: /
     controller: App\Controller\HomeController::index

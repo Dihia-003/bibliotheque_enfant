@@ -1,0 +1,12 @@
+# Configuration principale des routes
+# Ce fichier charge automatiquement tous les contrôleurs avec leurs routes
+
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+# Import des routes de production
+prod_routes:
+    resource: packages/prod/routes.yaml

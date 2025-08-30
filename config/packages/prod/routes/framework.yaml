@@ -1,4 +1,0 @@
-# Configuration de production pour les routes du framework
-framework:
-    resource: .
-    type: yaml

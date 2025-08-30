@@ -1,24 +1,26 @@
+# Configuration principale des services
+# Ce fichier définit la configuration de base des services
+
 services:
-    # Configuration de production pour les services
     _defaults:
         autowire: true
         autoconfigure: true
         public: false
-        
-    # Configuration des contrôleurs
+
+    # Chargement automatique des contrôleurs
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
-        
-    # Configuration des entités
+
+    # Chargement automatique des entités
     App\Entity\:
         resource: '../src/Entity/'
-        
-    # Configuration des repositories
+
+    # Chargement automatique des repositories
     App\Repository\:
         resource: '../src/Repository/'
-        
-    # Configuration des commandes
+
+    # Chargement automatique des commandes
     App\Command\:
         resource: '../src/Command/'
         tags: ['console.command']

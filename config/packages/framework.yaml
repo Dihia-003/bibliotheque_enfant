@@ -1,0 +1,10 @@
+# Configuration principale du framework
+# Ce fichier définit la configuration de base du framework
+
+framework:
+    secret: '%env(APP_SECRET)%'
+    session: true
+    profiler:
+        collect: false
+        only_exceptions: true
+    error_controller: App\Controller\ErrorController::index
