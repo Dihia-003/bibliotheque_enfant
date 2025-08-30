@@ -1,15 +1,5 @@
 framework:
     notifier:
         # Configuration de production pour les notifications
-        default_bus: notifier.bus.default
-        
-        # Configuration des transports
-        transports:
-            email: '%env(NOTIFIER_DSN)%'
-            slack: '%env(SLACK_DSN)%'
-        
-        # Configuration des bus
-        buses:
-            notifier.bus.default:
-                middleware:
-                    - doctrine_transaction
+        enabled: true
+        message_bus: messenger.bus.default
