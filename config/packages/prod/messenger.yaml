@@ -2,16 +2,3 @@ framework:
     messenger:
         # Configuration de production pour le messenger
         default_bus: messenger.bus.default
-        
-        # Configuration des transports
-        transports:
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            failed: 'doctrine://default?queue_name=failed'
-            sync: 'sync://'
-        
-        # Configuration des bus
-        buses:
-            messenger.bus.default:
-                middleware:
-                    - doctrine_transaction
-                    - doctrine_ping_connection

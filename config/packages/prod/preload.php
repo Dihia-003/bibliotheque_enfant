@@ -22,7 +22,5 @@ return [
     'files' => [
         // Fichiers de configuration
         __DIR__ . '/../../config/bundles.php',
-        __DIR__ . '/../../config/packages/prod/framework.yaml',
-        __DIR__ . '/../../config/packages/prod/doctrine.yaml',
     ],
 ];
