@@ -5,7 +5,7 @@ twig:
     exception_controller: null
     
     # Configuration du cache
-    cache: true
+    cache: '%kernel.cache_dir%/twig'
     auto_reload: false
     
     # Configuration des formulaires
