@@ -15,8 +15,8 @@ chmod -R 755 var public/uploads || echo "Warning: Permission change failed, cont
 echo "🎨 Compilation des assets..."
 rm -rf public/assets var/cache/prod/.assets_compiled
 
-# Compiler les assets en ignorant les erreurs de base de données
-php bin/console asset-map:compile --env=prod --no-interaction || echo "Warning: Assets compilation failed, continuing..."
+# Compiler les assets en mode dev pour éviter les erreurs de base de données
+php bin/console asset-map:compile --env=dev --no-interaction || echo "Warning: Assets compilation failed, continuing..."
 
 # Vérifier que les assets ont été compilés
 if [ -d "public/assets" ] && [ "$(ls -A public/assets)" ]; then
