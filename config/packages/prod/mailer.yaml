@@ -1,0 +1,13 @@
+framework:
+    mailer:
+        # Configuration de production pour le mailer
+        dsn: '%env(MAILER_DSN)%'
+        
+        # Configuration des en-têtes par défaut
+        envelope:
+            sender: '%env(MAILER_SENDER)%'
+            recipients: []
+        
+        # Configuration des transports
+        transports:
+            main: '%env(MAILER_DSN)%'

@@ -1,0 +1,13 @@
+framework:
+    default_locale: fr
+    translator:
+        # Configuration de production pour la traduction
+        default_path: '%kernel.project_dir%/translations'
+        fallbacks:
+            - fr
+        
+        # Configuration du cache des traductions
+        cache:
+            enabled: true
+            type: 'cache.adapter.filesystem'
+            namespace: 'translations'

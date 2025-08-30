@@ -1,0 +1,5 @@
+# Configuration de production pour les routes d'EasyAdmin
+admin:
+    resource: ../src/Controller/Admin/DashboardController.php
+    type: attribute
+    prefix: /admin

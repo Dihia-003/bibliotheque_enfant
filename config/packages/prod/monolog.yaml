@@ -1,0 +1,25 @@
+monolog:
+    # Configuration de production pour Monolog
+    channels: ['!event', '!doctrine']
+    
+    handlers:
+        # Log principal en production
+        main:
+            type: stream
+            path: 'php://stderr'
+            level: error
+            channels: ['!event', '!doctrine']
+        
+        # Log des erreurs critiques
+        critical:
+            type: stream
+            path: 'php://stderr'
+            level: critical
+            channels: ['!event', '!doctrine']
+        
+        # Log des erreurs de base de données
+        doctrine:
+            type: stream
+            path: 'php://stderr'
+            level: error
+            channels: ['doctrine']

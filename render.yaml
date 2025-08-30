@@ -9,10 +9,12 @@ services:
       - key: APP_ENV
         value: prod
       - key: APP_DEBUG
-        value: 1
+        value: 0
       - key: DATABASE_URL
         value: postgresql://postgres.hyrbvsxrxfanivasssfl:0hmMirvhu0ZnSps0@aws-0-eu-central-1.pooler.supabase.com:6543/postgres
       - key: APP_SECRET
         generateValue: true
-    healthCheckPath: /admin
+      - key: MAILER_DSN
+        value: null://null
+    healthCheckPath: /
     autoDeploy: true

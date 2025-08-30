@@ -1,0 +1,10 @@
+framework:
+    validation:
+        # Configuration de production pour la validation
+        enable_annotations: false
+        mapping:
+            paths: []
+        
+        # Configuration des contraintes
+        constraints:
+            - App\Validator\Constraints\CustomConstraint

@@ -1,0 +1,38 @@
+# Configuration de production pour les routes
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+# Configuration des routes d'administration
+admin:
+    resource: ../src/Controller/Admin/
+    type: attribute
+    prefix: /admin
+
+# Configuration des routes de sécurité
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+# Configuration des routes principales
+app_home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+app_livre_index:
+    path: /livre
+    controller: App\Controller\LivreController::index
+
+app_livre_show:
+    path: /livre/{id}
+    controller: App\Controller\LivreController::show

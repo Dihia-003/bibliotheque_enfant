@@ -1,0 +1,24 @@
+services:
+    # Configuration de production pour les services
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        
+    # Configuration des contrôleurs
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+        
+    # Configuration des entités
+    App\Entity\:
+        resource: '../src/Entity/'
+        
+    # Configuration des repositories
+    App\Repository\:
+        resource: '../src/Repository/'
+        
+    # Configuration des commandes
+    App\Command\:
+        resource: '../src/Command/'
+        tags: ['console.command']

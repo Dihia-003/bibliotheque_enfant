@@ -1,13 +1,28 @@
-# Ignorer les assets compilés localement
-public/assets/
-var/cache/
-var/log/
-
-# Ignorer les fichiers de développement
+# Fichiers et dossiers à ignorer lors du build Docker
+.git
+.gitignore
+README.md
+README-deploy.md
 .env.local
 .env.test
-.env.dev
-
-# Ignorer les dossiers de build
-node_modules/
-vendor/
+.env.prod
+.idea
+.vscode
+node_modules
+vendor
+var/cache
+var/log
+public/assets
+public/bundles
+tests
+docker-compose.yml
+docker-compose.override.yml
+compose.yaml
+compose.override.yaml
+clean-assets.sh
+deploy.sh
+deploy-prod.php
+deploy-render.sh
+prepare-deploy.bat
+Procfile
+render.yaml

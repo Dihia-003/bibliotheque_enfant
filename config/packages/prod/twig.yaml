@@ -1,0 +1,16 @@
+twig:
+    # Configuration de production pour Twig
+    debug: false
+    strict_variables: false
+    exception_controller: null
+    
+    # Configuration du cache
+    cache: true
+    auto_reload: false
+    
+    # Configuration des formulaires
+    form_themes: ['bootstrap_5_layout.html.twig']
+    
+    # Configuration des extensions
+    extensions:
+        - Twig\Extension\StringLoaderExtension
