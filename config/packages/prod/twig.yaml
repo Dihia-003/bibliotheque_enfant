@@ -10,7 +10,3 @@ twig:
     
     # Configuration des formulaires
     form_themes: ['bootstrap_5_layout.html.twig']
-    
-    # Configuration des extensions
-    extensions:
-        - Twig\Extension\StringLoaderExtension
