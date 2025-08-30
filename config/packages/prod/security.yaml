@@ -1,6 +1,5 @@
 security:
     # Configuration de production pour la sécurité
-    enable_authenticator_manager: true
     
     # Configuration des utilisateurs
     providers:
