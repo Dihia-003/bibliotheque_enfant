@@ -1,18 +1,33 @@
-# Dockerfile pour Symfony 7.2 sur Render - Version simplifiée et corrigée
-FROM php:8.2-cli
+# Utilisation de l'image PHP 8.2 avec Apache
+FROM php:8.2-apache
 
 # Variables d'environnement
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
 
-# Installation des dépendances système minimales
+# Installation des dépendances système
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    zip \
     unzip \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+    sqlite3 \
+    libsqlite3-dev \
+    && docker-php-ext-install \
+        pdo \
+        pdo_sqlite \
+        mbstring \
+        exif \
+        pcntl \
+        bcmath \
+        gd \
+        zip \
+    && a2enmod rewrite
 
 # Installation de l'extension PostgreSQL pour PHP
 RUN docker-php-ext-install pdo_pgsql

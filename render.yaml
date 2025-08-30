@@ -4,14 +4,12 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    dockerContext: .
+    dockerCommand: docker-entrypoint.sh
     envVars:
       - key: APP_ENV
         value: prod
       - key: APP_DEBUG
         value: 0
-      - key: DATABASE_URL
-        value: postgresql://postgres.hyrbvsxrxfanivasssfl:0hmMirvhu0ZnSps0@aws-0-eu-central-1.pooler.supabase.com:6543/postgres
       - key: APP_SECRET
         generateValue: true
       - key: MAILER_DSN
