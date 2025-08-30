@@ -22,18 +22,4 @@ class SecurityController extends AbstractController
             'error' => $error
         ]);
     }
-
-    #[Route(path: '/login_check', name: 'app_login_check')]
-    public function check(): void
-    {
-        // This method can be blank - it will be intercepted by the key on your firewall
-        throw new \LogicException('This method can be blank - it will be intercepted by the key on your firewall.');
-    }
-
-    #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): void
-    {
-        // This method can be blank - it will be intercepted by the key on your firewall
-        throw new \LogicException('This method can be blank - it will be intercepted by the key on your firewall.');
-    }
 } 
