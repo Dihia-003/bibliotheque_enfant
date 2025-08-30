@@ -161,6 +161,19 @@
         </footer>
 
         <script>
+            // Configuration Turbo pour forcer HTTPS
+            window.addEventListener('DOMContentLoaded', function() {
+                if (typeof Turbo !== 'undefined') {
+                    Turbo.session.drive = true;
+                    // Forcer HTTPS pour toutes les requêtes
+                    document.addEventListener('turbo:before-fetch-request', function(event) {
+                        if (event.detail.url.startsWith('http://')) {
+                            event.detail.url = event.detail.url.replace('http://', 'https://');
+                        }
+                    });
+                }
+            });
+            
             // Menu burger - Code intégré directement dans le template
             document.addEventListener('DOMContentLoaded', function() {
                 console.log('Initialisation du menu burger');
