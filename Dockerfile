@@ -29,19 +29,14 @@ RUN apt-get update && apt-get install -y \
         zip \
     && a2enmod rewrite
 
-# Installation de l'extension PostgreSQL pour PHP (gardée pour compatibilité)
-RUN apt-get install -y libpq-dev \
-    && docker-php-ext-install pdo_pgsql
-
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Définition du répertoire de travail
 WORKDIR /var/www
 
-# Copie des fichiers de dépendances en premier
-COPY composer.json ./
-COPY composer.lock ./
+# Copie des fichiers de dépendances
+COPY composer.json composer.lock ./
 
 # Installation des dépendances
 RUN composer install --no-dev --optimize-autoloader --no-interaction
@@ -56,15 +51,11 @@ RUN mkdir -p var/cache var/log public/uploads
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# Copie du script d'entrée
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
 # Définition des permissions
 RUN chown -R www-data:www-data /var/www
 
 # Exposition du port 80
 EXPOSE 80
 
-# Point d'entrée
-ENTRYPOINT ["docker-entrypoint.sh"]
+# Point d'entrée simplifié
+CMD ["apache2-foreground"]
