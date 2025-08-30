@@ -2,9 +2,3 @@ framework:
     router:
         # Configuration de production pour le routing
         strict_requirements: false
-        
-        # Configuration du cache des routes
-        cache:
-            enabled: true
-            type: 'cache.adapter.filesystem'
-            namespace: 'router'
