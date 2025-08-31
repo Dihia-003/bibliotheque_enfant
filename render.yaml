@@ -4,6 +4,7 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
+
     # FORCER REDÉPLOIEMENT - MIGRATION TABLE USER MANQUANTE
     envVars:
       - key: APP_ENV
@@ -12,7 +13,9 @@ services:
         value: 0
       - key: APP_SECRET
         generateValue: true
+      - key: DATABASE_URL
+        value: "sqlite:///var/www/var/database.sqlite"
       - key: MAILER_DSN
         value: null://null
-    healthCheckPath: /
+    healthCheckPath: /health
     autoDeploy: true

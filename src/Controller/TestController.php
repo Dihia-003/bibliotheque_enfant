@@ -64,4 +64,14 @@ final class TestController extends AbstractController
         
         return new JsonResponse($results);
     }
+
+    #[Route('/health', name: 'app_health')]
+    public function health(): JsonResponse
+    {
+        return new JsonResponse([
+            'status' => 'healthy',
+            'timestamp' => (new \DateTime())->format('Y-m-d H:i:s'),
+            'environment' => $this->getParameter('kernel.environment')
+        ]);
+    }
 }
