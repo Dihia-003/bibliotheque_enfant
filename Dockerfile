@@ -30,8 +30,10 @@ RUN apt-get update && apt-get install -y \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
 
-# Installation de Composer
+# Installation de Composer et Symfony CLI
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://get.symfony.com/cli/installer | bash
+RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
 WORKDIR /var/www
 
