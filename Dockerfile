@@ -1,4 +1,4 @@
-# Utilisation de l'image PHP 8.2 avec Apache
+# Dockerfile pour Symfony 7.2 sur Render - Version corrigée avec autoload forcé
 FROM php:8.2-apache
 
 # Variables d'environnement
@@ -27,25 +27,42 @@ RUN apt-get update && apt-get install -y \
         bcmath \
         gd \
         zip \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && rm -rf /var/lib/apt/lists/*
+
+# Installation de l'extension PostgreSQL pour PHP (gardée pour compatibilité)
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo_pgsql
 
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Définition du répertoire de travail
 WORKDIR /var/www
 
-# Copie des fichiers de dépendances
-COPY composer.json composer.lock ./
+# Copie des fichiers de configuration en premier
+COPY config/ ./config/
+COPY src/ ./src/
+COPY templates/ ./templates/
+COPY migrations/ ./migrations/
+COPY public/ ./public/
+COPY bin/ ./bin/
+COPY importmap.php ./
+COPY symfony.lock ./
 
-# Installation des dépendances (sans scripts)
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+# Copie des fichiers de dépendances en premier
+COPY composer.json ./
+COPY composer.lock ./
+
+# Installation des dépendances avec scripts activés
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Copie du reste du code source
 COPY . .
 
-# Génération de l'autoload et exécution des scripts nécessaires
-RUN composer dump-autoload --optimize --no-dev --classmap-authoritative
+# Génération FORCÉE de l'autoload et vérification
+RUN composer dump-autoload --optimize --no-dev --classmap-authoritative --no-interaction
+RUN ls -la vendor/ || echo "Vendor directory not found"
+RUN ls -la vendor/autoload* || echo "Autoload files not found"
 
 # Création des dossiers nécessaires
 RUN mkdir -p var/cache var/log public/uploads
@@ -54,11 +71,16 @@ RUN mkdir -p var/cache var/log public/uploads
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+# Copie du script d'entrée
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Définition des permissions
 RUN chown -R www-data:www-data /var/www
 
 # Exposition du port 80
 EXPOSE 80
 
-# Point d'entrée ultra-simple
+# Point d'entrée
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
