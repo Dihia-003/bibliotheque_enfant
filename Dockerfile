@@ -34,6 +34,7 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+RUN ln -sf /usr/local/bin/symfony /usr/local/bin/symfony-cmd
 
 WORKDIR /var/www
 
