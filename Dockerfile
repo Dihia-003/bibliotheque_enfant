@@ -64,6 +64,9 @@ RUN composer dump-autoload --optimize --no-dev --classmap-authoritative --no-int
 RUN ls -la vendor/ || echo "Vendor directory not found"
 RUN ls -la vendor/autoload* || echo "Autoload files not found"
 
+# Génération des assets Symfony
+RUN php bin/console asset:install public --env=prod || echo "Asset install failed, continuing..."
+
 # Création des dossiers nécessaires
 RUN mkdir -p var/cache var/log public/uploads
 
