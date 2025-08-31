@@ -44,11 +44,14 @@ COPY public/ ./public/
 COPY bin/ ./bin/
 COPY importmap.php ./
 COPY symfony.lock ./
-COPY .env ./
+COPY env.example ./
 
 # Copie des fichiers de dépendances en premier
 COPY composer.json ./
 COPY composer.lock ./
+
+# Création du fichier .env à partir de l'exemple
+RUN cp env.example .env
 
 # Installation des dépendances SANS scripts pour éviter l'erreur symfony-cmd
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
