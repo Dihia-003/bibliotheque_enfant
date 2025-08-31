@@ -75,6 +75,9 @@ RUN echo "/* Fallback CSS - Bibliothèque des Enfants */" > public/assets/styles
     echo "body { background-color: #f1f9ff; font-family: 'Comic Sans MS', cursive; }" >> public/assets/styles/app-Wux0ucT.css
 
 # Création des fichiers JavaScript de fallback
+RUN echo "/* Fallback App JS */" > public/assets/app-jgPm2-L.js && \
+    echo "console.log('Fallback App JS loaded');" >> public/assets/app-jgPm2-L.js
+
 RUN echo "/* Fallback Bootstrap */" > public/assets/bootstrap-xCO4u8H.js && \
     echo "console.log('Fallback Bootstrap loaded');" >> public/assets/bootstrap-xCO4u8H.js
 
@@ -86,6 +89,9 @@ RUN echo "/* Fallback Turbo */" > public/assets/vendor/@hotwired/turbo/turbo.ind
 
 RUN echo "/* Fallback Controllers */" > public/assets/@symfony/stimulus-bundle/controllers-IWeobkd.js && \
     echo "console.log('Fallback Controllers loaded');" >> public/assets/@symfony/stimulus-bundle/controllers-IWeobkd.js
+
+RUN echo "/* Fallback Loader */" > public/assets/@symfony/stimulus-bundle/loader-V1GtHuK.js && \
+    echo "console.log('Fallback Loader loaded');" >> public/assets/@symfony/stimulus-bundle/loader-V1GtHuK.js
 
 RUN echo "/* Fallback UX Turbo */" > public/assets/@symfony/ux-turbo/turbo_controller-8wQNi2p.js && \
     echo "console.log('Fallback UX Turbo loaded');" >> public/assets/@symfony/ux-turbo/turbo_controller-8wQNi2p.js
