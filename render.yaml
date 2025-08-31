@@ -4,7 +4,7 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    # Configuration pour forcer le redéploiement - CORRECTIONS APPLIQUÉES
+    # FORCER REDÉPLOIEMENT - MIGRATION TABLE USER MANQUANTE
     envVars:
       - key: APP_ENV
         value: prod
