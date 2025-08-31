@@ -53,8 +53,8 @@ COPY composer.lock ./
 # Création du fichier .env à partir de l'exemple
 RUN cp env.example .env
 
-# Installation des dépendances SANS scripts pour éviter l'erreur symfony-cmd
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+# Installation des dépendances avec scripts pour configurer Symfony Runtime
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Copie du reste du code source
 COPY . .
