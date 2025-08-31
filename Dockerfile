@@ -30,10 +30,6 @@ RUN apt-get update && apt-get install -y \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
 
-# Installation de l'extension PostgreSQL pour PHP (gardée pour compatibilité)
-RUN apt-get install -y libpq-dev \
-    && docker-php-ext-install pdo_pgsql
-
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
