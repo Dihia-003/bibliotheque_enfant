@@ -44,6 +44,7 @@ COPY public/ ./public/
 COPY bin/ ./bin/
 COPY importmap.php ./
 COPY symfony.lock ./
+COPY .env ./
 
 # Copie des fichiers de dépendances en premier
 COPY composer.json ./
