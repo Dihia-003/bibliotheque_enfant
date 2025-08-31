@@ -102,6 +102,11 @@ RUN echo "/* Fallback Hello Controller */" > public/assets/controllers/hello_con
 # Création des dossiers nécessaires
 RUN mkdir -p var/cache var/log public/uploads
 
+# Création de la base de données SQLite et exécution des migrations
+RUN touch var/database.sqlite && \
+    chmod 664 var/database.sqlite && \
+    php bin/console doctrine:migrations:migrate --env=prod --no-interaction || echo "Migrations failed, continuing..."
+
 # Configuration d'Apache
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
