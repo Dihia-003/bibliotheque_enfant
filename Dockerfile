@@ -49,8 +49,8 @@ COPY symfony.lock ./
 COPY composer.json ./
 COPY composer.lock ./
 
-# Installation des dépendances avec scripts activés
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Installation des dépendances SANS scripts pour éviter l'erreur symfony-cmd
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Copie du reste du code source
 COPY . .
